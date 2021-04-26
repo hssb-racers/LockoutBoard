@@ -1,0 +1,4 @@
+ignored:
+  # ignore DL3007, as I am too lazy to adjust this repeatedly.
+  # When it breaks for me, I know who to blame.
+  - DL3007
