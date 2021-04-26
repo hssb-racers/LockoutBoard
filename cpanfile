@@ -1,4 +1,5 @@
 requires "Dancer2" => "0.300005";
+requires "Starman" => "0";
 
 recommends "YAML"             => "0";
 recommends "URL::Encode::XS"  => "0";
