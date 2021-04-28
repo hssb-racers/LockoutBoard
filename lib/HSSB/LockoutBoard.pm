@@ -6,7 +6,7 @@ use String::Random qw(random_regex);
 
 our $VERSION = '0.1';
 
-our @possible_objectives = @{ YAML::LoadFile( 'objectives.yaml' ) };
+our @possible_objectives = @{ YAML::LoadFile( 'data/objectives.yaml' ) };
 
 
 get '/' => sub {
