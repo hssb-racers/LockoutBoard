@@ -2,7 +2,7 @@
 <div id="board" data-size="<% objectives.size %>">
 
 	<% FOREACH item in objectives %>
-	<div id="quest-<% loop.index() %>"class="quest">
+	<div id="quest-<% loop.index() %>" class="quest" data-captured="<% item.captured %>">
 		<% item.objective %>
 	</div>
 	<% END %>
