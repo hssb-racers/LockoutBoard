@@ -60,3 +60,10 @@ engines:
 #      cookie_name: eshop.session
 #      is_secure: 1
 #      is_http_only: 1
+
+plugins:
+  Database:
+    driver: SQLite
+    database: 'data/boards.sqlite'
+    on_connect_do:
+      - 'create table if not exists boardobjectives ( board varchar(32) NOT NULL, objective_index integer not null, objective text not null, captured_by varchar(30), capture_utctime integer, primary key ( board, objective_index ))'
