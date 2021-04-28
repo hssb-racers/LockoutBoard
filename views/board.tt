@@ -1,0 +1,10 @@
+<!-- vim: set ft=html : -->
+<div id="board" data-size="<% objectives.size %>">
+
+	<% FOREACH item in objectives %>
+	<div id="quest-<% loop.index() %>"class="quest">
+		<% item.objective %>
+	</div>
+	<% END %>
+
+</div>

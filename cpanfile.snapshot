@@ -612,6 +612,20 @@ DISTRIBUTIONS
       Scalar::Util 0
       perl 5.006002
       strict 0
+  List-Gen-0.974
+    pathname: A/AS/ASG/List-Gen-0.974.tar.gz
+    provides:
+      List::Gen 0.974
+      List::Gen::Benchmark undef
+      List::Gen::Cookbook undef
+      List::Gen::Haskell undef
+      List::Gen::Lazy undef
+      List::Gen::Lazy::Builtins undef
+      List::Gen::Lazy::Ops undef
+      List::Gen::Perl6 undef
+      List::Generator undef
+    requirements:
+      perl v5.8.6
   Module-Build-0.4231
     pathname: L/LE/LEONT/Module-Build-0.4231.tar.gz
     provides:
@@ -1041,6 +1055,18 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 6.30
       IO::File 1.14
+  String-Random-0.31
+    pathname: S/SH/SHLOMIF/String-Random-0.31.tar.gz
+    provides:
+      String::Random 0.31
+    requirements:
+      Carp 0
+      Exporter 0
+      Module::Build 0.28
+      parent 0
+      perl 5.006_001
+      strict 0
+      warnings 0
   Sub-Exporter-0.987
     pathname: R/RJ/RJBS/Sub-Exporter-0.987.tar.gz
     provides:
