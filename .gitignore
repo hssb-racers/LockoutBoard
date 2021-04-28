@@ -1,1 +1,6 @@
+# ignore the vendor libraries - they will be provided by carton
 local/
+
+# ignore vim swap files
+**.swp
+**.swo
