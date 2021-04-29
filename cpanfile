@@ -1,5 +1,6 @@
 requires "Dancer2" => "0.300005";
 requires "Dancer2::Plugin::Database" => "0";
+requires "DBD::SQLite" => "0";
 requires "Starman" => "0";
 requires "Template::Toolkit" => "0";
 requires "List::Gen" => "0";
