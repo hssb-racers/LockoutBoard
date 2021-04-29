@@ -3,7 +3,9 @@
 
 	<% FOREACH item in objectives %>
 	<div id="quest-<% loop.index() %>" class="quest" data-captured="<% item.captured_by or "uncaptured" %>">
+		<div class="vertical-center">
 		<% item.objective %>
+		</div>
 	</div>
 	<% END %>
 

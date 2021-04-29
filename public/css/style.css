@@ -49,6 +49,7 @@ code,
 	margin: 15px;
 	text-align: center;
 	font-size: 14pt;
+	position: relative;
 }
 
 #board .quest[data-captured="true"] {
@@ -57,4 +58,14 @@ code,
 
 #board .quest[data-captured="false"] {
 	background: darkred;
+}
+
+#board .quest .vertical-center {
+	left: 5px;
+	right: 5px;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
 }
