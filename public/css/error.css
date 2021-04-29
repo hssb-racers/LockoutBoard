@@ -3,7 +3,7 @@ body {
 }
 
 h1 {
-	color: #AA0000;
+	color: #aa0000;
 	border-bottom: 1px solid #444;
 }
 
@@ -58,7 +58,8 @@ table.context {
 	border-spacing: 0;
 }
 
-table.context th, table.context td {
+table.context th,
+table.context td {
 	padding: 0;
 }
 
@@ -83,4 +84,3 @@ pre.error {
 	border-bottom: 1px solid #eee;
 	overflow-x: auto;
 }
-
