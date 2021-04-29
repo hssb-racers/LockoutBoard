@@ -6,40 +6,12 @@ use FindBin;
 use lib "$FindBin::Bin/../lib";
 
 
-# use this block if you don't need middleware, and only have a single target Dancer app to run here
 use HSSB::LockoutBoard;
-
-HSSB::LockoutBoard->to_app;
-
-=begin comment
-# use this block if you want to include middleware such as Plack::Middleware::Deflater
-
-use HSSB::LockoutBoard;
-use Plack::Builder;
-
-builder {
-    enable 'Deflater';
-    HSSB::LockoutBoard->to_app;
-}
-
-=end comment
-
-=cut
-
-=begin comment
-# use this block if you want to mount several applications on different path
-
-use HSSB::LockoutBoard;
-use HSSB::LockoutBoard_admin;
+use HSSB::LockoutBoard::API;
 
 use Plack::Builder;
 
 builder {
-    mount '/'      => HSSB::LockoutBoard->to_app;
-    mount '/admin'      => HSSB::LockoutBoard_admin->to_app;
+	mount '/'	=> HSSB::LockoutBoard->to_app;
+	mount '/api'	=> HSSB::LockoutBoard::API->to_app;
 }
-
-=end comment
-
-=cut
-

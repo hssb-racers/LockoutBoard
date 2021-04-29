@@ -1,5 +1,5 @@
 <!-- vim: set ft=html : -->
-<div id="board" data-size="<% objectives.size %>">
+<div id="board" data-boardid="<% board_id %>" data-size="<% objectives.size %>">
 
 	<% FOREACH item in objectives %>
 	<div id="quest-<% loop.index() %>" class="quest" data-captured="<% item.captured_by or "uncaptured" %>">
@@ -10,3 +10,4 @@
 	<% END %>
 
 </div>
+<script type="text/javascript" src="<% request.uri_base %>/javascripts/board.js"></script>
