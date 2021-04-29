@@ -4,15 +4,15 @@ body {
 
 h1 {
 	color: #aa0000;
-	border-bottom: 1px solid #444;
+	border-bottom: 1px solid #444444;
 }
 
-h2 { color: #444; }
+h2 { color: #444444; }
 
 pre {
 	font-family: "lucida console", "monaco", "andale mono", "bitstream vera sans mono", "consolas", monospace;
 	font-size: 12px;
-	border-left: 2px solid #777;
+	border-left: 2px solid #777777;
 	padding-left: 1em;
 }
 
@@ -21,24 +21,24 @@ footer {
 }
 
 span.key {
-	color: #449;
+	color: #444499;
 	font-weight: bold;
 	width: 120px;
 	display: inline;
 }
 
 span.value {
-	color: #494;
+	color: #449944;
 }
 
 /* these are for the message boxes */
 
 pre.content {
-	background-color: #eee;
-	color: #000;
+	background-color: #eeeeee;
+	color: #000000;
 	padding: 1em;
 	margin: 0;
-	border: 1px solid #aaa;
+	border: 1px solid #aaaaaa;
 	border-top: 0;
 	margin-bottom: 1em;
 	overflow-x: auto;
@@ -47,8 +47,8 @@ pre.content {
 div.title {
 	font-family: "lucida console", "monaco", "andale mono", "bitstream vera sans mono", "consolas", monospace;
 	font-size: 12px;
-	background-color: #aaa;
-	color: #444;
+	background-color: #aaaaaa;
+	color: #444444;
 	font-weight: bold;
 	padding: 3px;
 	padding-left: 10px;
@@ -64,7 +64,7 @@ table.context td {
 }
 
 table.context th {
-	color: #889;
+	color: #888899;
 	font-weight: normal;
 	padding-right: 15px;
 	text-align: right;
@@ -75,12 +75,12 @@ table.context th {
 }
 
 pre.error {
-	background: #334;
-	color: #ccd;
+	background: #333344;
+	color: #ccccdd;
 	padding: 1em;
-	border-top: 1px solid #000;
-	border-left: 1px solid #000;
-	border-right: 1px solid #eee;
-	border-bottom: 1px solid #eee;
+	border-top: 1px solid #000000;
+	border-left: 1px solid #000000;
+	border-right: 1px solid #eeeeee;
+	border-bottom: 1px solid #eeeeee;
 	overflow-x: auto;
 }
