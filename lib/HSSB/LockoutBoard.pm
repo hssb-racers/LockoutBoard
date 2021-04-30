@@ -1,6 +1,7 @@
 package HSSB::LockoutBoard;
 use Dancer2;
 use Dancer2::Plugin::Database;
+use Dancer2::Plugin::Auth::Extensible;
 use YAML ();
 use List::Gen;
 use String::Random qw(random_regex);
@@ -43,5 +44,29 @@ get '/board/:board' => sub {
 		board_id => $board_id,
 	};
 };
+
+get '/register' => sub {
+	template 'register' => { title => "HSSB::LockoutBoard Sign-Up"};
+};
+post '/register' => sub {
+	my $user = body_parameters->get('username');
+	my $pass = body_parameters->get('password');
+	my $rpwd = body_parameters->get('password-repeat');
+	send_error "username required" unless $user;
+	send_error "password required" unless $pass;
+	send_error "repeated password doesn't match" unless $pass eq $rpwd;
+
+	send_error "user already exists" if get_user_details $user;
+
+	create_user username => $user;
+	user_password username => $user, new_password => $pass;
+
+	redirect '/';
+};
+
+get '/authtest' => require_login sub {
+	return "Authenticated successfully!";
+};
+
 
 true;
