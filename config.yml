@@ -30,6 +30,7 @@ charset: "UTF-8"
 #template: "simple"
 
 template: "template_toolkit"
+session: "YAML"
 
 engines:
   template:
@@ -37,6 +38,10 @@ engines:
       # Note: start_tag and end_tag are regexes
       start_tag: '<%'
       end_tag:   '%>'
+  session:
+    YAML:
+      session_dir: "data/sessions"
+      cookie_duration: 86400
 
 plugins:
   Auth::Extensible:
