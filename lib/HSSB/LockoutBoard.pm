@@ -43,6 +43,11 @@ post '/board/generate' => require_login sub {
 	my $size = param 'size';
 	send_error("Only sizes 9 and 25 are supported right now",400) unless grep { $size eq $_ } qw{9 25};
 
+	my @team1_players = body_parameters->get_all('team-1');
+	my @team2_players = body_parameters->get_all('team-2');
+
+	send_error("Players are required!") unless @team1_players and @team2_players;
+
 	my $board_id;
 	my $retry_count = 50;
 	do {
@@ -55,6 +60,13 @@ post '/board/generate' => require_login sub {
 	my $i = 0;
 	foreach my $objective (List::Gen::makegen(@possible_objectives)->pick($size)){
 		$stmt->execute($board_id, $objective->{objective}, $i++);
+	}
+
+	foreach my $player (@team1_players){
+		database->quick_insert('teammembers', { board => $board_id, team => 1, player => $player });
+	}
+	foreach my $player (@team2_players){
+		database->quick_insert('teammembers', { board => $board_id, team => 2, player => $player });
 	}
 
 	return redirect( "/board/$board_id" );
