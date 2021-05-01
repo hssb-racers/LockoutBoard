@@ -9,6 +9,14 @@ get '/capture/:board/:objID' => require_login sub {
 	my $objID = param 'objID';
 	my $player = logged_in_user->{'username'};
 
+	send_error("non-teammates are not allowed to capture items",403) unless database->quick_count(
+			'teammembers',
+			{
+				board => $board_id,
+				player => $player,
+			}
+		);
+	
 	my $count = database->quick_count('boardobjectives', { board => $board_id, objective_index => int($objID) });
 	error "found $count rows in table";
 	send_error("board or objective not found", 400) unless $count == 1;
