@@ -33,4 +33,27 @@ get '/capture/:board/:objID' => require_login sub {
 	send_error "something went wrong in the DB";
 };
 
+get '/board/:board' => sub {
+	my $board_id = param 'board';
+	my $username;
+	if( defined logged_in_user ){
+		$username = logged_in_user->{'username'};
+	}
+
+	# this has a fallback to team 1, so non-players get defaulted there
+	my $team = database->quick_lookup( 'teammembers', { board => $board_id, player => $username, }, "team") // '1';
+
+	my @objectives = database->quick_select('scored_board', { board => $board_id }, { order_by => 'objective_index', columns => ['captured_by_team', 'objective_index']});
+	foreach my $obj (@objectives){
+		$obj->{capture_state} = defined $obj->{captured_by_team} ? $obj->{captured_by_team} == $team ? 'true' : 'false' : 'uncaptured';
+	}
+
+	return {
+		board_state => database->quick_lookup( 'boards', { board => $board_id, }, 'state'),
+		objectives => \@objectives,
+	};
+};
+
+
+
 true;
