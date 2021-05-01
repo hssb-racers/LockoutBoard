@@ -68,8 +68,8 @@ post '/register' => sub {
 };
 
 get '/authtest' => require_login sub {
-	return "Authenticated successfully!";
+	use Data::Dumper;
+	return Dumper( logged_in_user );
 };
-
 
 true;
