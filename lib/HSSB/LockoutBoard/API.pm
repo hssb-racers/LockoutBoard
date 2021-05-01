@@ -1,12 +1,13 @@
 package HSSB::LockoutBoard::API;
 use Dancer2;
 use Dancer2::Plugin::Database;
+use Dancer2::Plugin::Auth::Extensible;
 set serializer => 'JSON';
 
-get '/capture/:board/:objID/:player' => sub {
+get '/capture/:board/:objID' => require_login sub {
 	my $board_id = param 'board';
 	my $objID = param 'objID';
-	my $player = param 'player';
+	my $player = logged_in_user->{'username'};
 
 	my $count = database->quick_count('boardobjectives', { board => $board_id, objective_index => int($objID) });
 	error "found $count rows in table";

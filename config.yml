@@ -49,7 +49,9 @@ plugins:
     driver: SQLite
     database: 'data/boards.sqlite'
     on_connect_do:
-      - 'create table if not exists boardobjectives ( board varchar(32) NOT NULL, objective_index integer not null, objective text not null, captured_by varchar(30), capture_utctime integer, primary key ( board, objective_index ))'
+      - 'create table if not exists boardobjectives ( board varchar(32) NOT NULL, objective_index integer not null, objective text not null, captured_by varchar(32), capture_utctime integer, primary key ( board, objective_index ))'
+      - 'create table if not exists teammembers ( board varchar(32) not null, team int not null, player varchar(32) not null, primary key (board, team, player) )'
       - 'CREATE TABLE if not exists users ( id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(32) NOT NULL UNIQUE, password VARCHAR(40) NOT NULL)'
       - 'CREATE TABLE if not exists roles ( id INTEGER PRIMARY KEY AUTOINCREMENT, role VARCHAR(32) NOT NULL)'
       - 'CREATE TABLE if not exists user_roles ( user_id INTEGER NOT NULL, role_id INTEGER NOT NULL, primary key (user_id, role_id))'
+      - 'create view if not exists scored_board as select b.board, b.objective_index, b.objective, b.captured_by, b.capture_utctime, t.team as captured_by_team from boardobjectives as b left join teammembers as t on b.board = t.board and b.captured_by = t.player'

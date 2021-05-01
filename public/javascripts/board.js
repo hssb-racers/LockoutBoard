@@ -7,11 +7,11 @@ function CaptureQuest(){
 	console.log("quest id: "+ quest_id);
 
 	$.ajax({
-		url: `/api/capture/${board_id}/${quest_id}/false`,
+		url: `/api/capture/${board_id}/${quest_id}`,
 		dataType: "json",
 		cache: false,
 	}).done(function(){
-		location.reload();
+		location.replace(location.href);
 	}).always(function(data,state){
 		console.log("data:",data);
 		console.log("state:",state);

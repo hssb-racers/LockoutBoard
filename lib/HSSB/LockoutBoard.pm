@@ -14,7 +14,7 @@ get '/' => sub {
 	template 'index' => { 'title' => 'HSSB::LockoutBoard' };
 };
 
-get '/board/generate/:size' => sub {
+get '/board/generate/:size' => require_login sub {
 	my $size = param 'size';
 	send_error("Only sizes 9 and 25 are supported right now",400) unless grep { $size eq $_ } qw{9 25};
 
@@ -31,17 +31,20 @@ get '/board/generate/:size' => sub {
 	return redirect( "/board/$board_id" );
 };
 
-get '/board/:board' => sub {
+get '/board/:board' => require_login sub {
 	my $board_id = param 'board';
 
-	my @objectives = database->quick_select('boardobjectives', { board => $board_id }, { order_by => 'objective_index'});
+	my @objectives = database->quick_select('scored_board', { board => $board_id }, { order_by => 'objective_index'});
 
 	send_error("board not found", 404) unless scalar @objectives;
+
+	my $team = database->quick_lookup('teammembers', { board => $board_id, player => logged_in_user->{'username'} }, 'team');
 
 	template 'board' => {
 		'title' => 'HSSB::LockoutBoard',
 		objectives => \@objectives,
 		board_id => $board_id,
+		this_team => $team,
 	};
 };
 

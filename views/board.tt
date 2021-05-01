@@ -2,7 +2,7 @@
 <div id="board" data-boardid="<% board_id %>" data-size="<% objectives.size %>">
 
 	<% FOREACH item in objectives %>
-	<div id="quest-<% loop.index() %>" class="quest" data-captured="<% item.captured_by or "uncaptured" %>">
+	<div id="quest-<% loop.index() %>" class="quest" data-captured="<% item.captured_by_team ? item.captured_by_team == this_team ? "true" : "false" : "uncaptured" %>">
 		<div class="vertical-center">
 		<% item.objective %>
 		</div>
