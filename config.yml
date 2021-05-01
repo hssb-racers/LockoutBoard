@@ -40,7 +40,7 @@ engines:
 
 plugins:
   Auth::Extensible:
-    login_without_redirect: 1
+    login_without_redirect: 0
 
     realms:
       users:
