@@ -11,15 +11,36 @@ our $VERSION = '0.1';
 our @possible_objectives = @{ YAML::LoadFile( 'data/objectives.yaml' ) };
 
 get '/' => sub {
-	template 'index' => { 'title' => 'HSSB::LockoutBoard' };
+	my @boards = database->quick_select('boards', { state => [ "generated", "waiting", "playing" ] });
+	my $username;
+	if( defined logged_in_user ){
+		$username = logged_in_user->{'username'};
+	}
+	foreach my $board ( @boards ){
+		$board->{user_is_player} = database->quick_count(
+			'teammembers',
+			{
+				board => $board->{board},
+				player => $username,
+			}
+		);
+	}
+	template 'index' => {
+		'title' => 'HSSB::LockoutBoard',
+		boards => \@boards,
+	};
 };
 
 get '/board/generate/:size' => require_login sub {
 	my $size = param 'size';
 	send_error("Only sizes 9 and 25 are supported right now",400) unless grep { $size eq $_ } qw{9 25};
 
-	# TODO: check for ID collisions
-	my $board_id = random_regex('[A-Za-z0-9]{32}');
+	my $board_id;
+	my $retry_count = 50;
+	do {
+		$board_id = random_regex('[A-Za-z0-9]{32}');
+		send_error "could not create a board" if $retry_count-- < 0;
+	} until database->quick_insert('boards', { board => $board_id, state => \'"generated"', });
 
 	my $stmt = database->prepare('insert into boardobjectives (board,objective,objective_index) values (?,?,?)');
 
