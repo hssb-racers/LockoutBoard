@@ -31,7 +31,15 @@ get '/' => sub {
 	};
 };
 
-get '/board/generate/:size' => require_login sub {
+get '/board/generate' => require_login sub {
+	template 'generate' => {
+		'title' => 'HSSB::LockoutBoard',
+		user => logged_in_user,
+		potential_players => [ database->quick_select('users', {}, { columns=>["username","id"]} )],
+	};
+};
+
+post '/board/generate' => require_login sub {
 	my $size = param 'size';
 	send_error("Only sizes 9 and 25 are supported right now",400) unless grep { $size eq $_ } qw{9 25};
 

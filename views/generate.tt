@@ -1,0 +1,38 @@
+<%# vim: set ft=html : %>
+<h1>Setting up a board</h1>
+
+<form method="POST">
+	<h2>Board Size</h2>
+	<div>
+		<input type="radio" id="3x3" name="size" value="9" checked>
+		<label for="3x3">3x3</label>
+	</div>
+
+	<div>
+		<input type="radio" id="5x5" name="size" value="25">
+		<label for="5x5">5x5</label>
+	</div>
+
+	<h2>Players and Teams</h2>
+	<p> Check all the users that should belong to the team. Only the players chosen now can actually capture items on the board.</p>
+
+	<%block team_playerlist %>
+		<ul>
+		<%foreach player in potential_players%>
+			<li>
+			<input type="checkbox" id="team-<%team%>-player-<%player.username%>" name="team-<%team%>" value="<%player.username%>">
+			<label for="team-<%team%>-player-<%player.username%>" ><%player.username%></label>
+			</li>
+		<%end%>
+		</ul>
+	<%end%>
+
+	<h3>Team One</h3>
+	<%process team_playerlist team='1' %>
+
+	<h3>Team Two</h3>
+	<%process team_playerlist team='2' %>
+
+	<br>
+	<input type="submit" value="Create Board">
+</form>
