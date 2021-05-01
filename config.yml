@@ -50,6 +50,6 @@ plugins:
     database: 'data/boards.sqlite'
     on_connect_do:
       - 'create table if not exists boardobjectives ( board varchar(32) NOT NULL, objective_index integer not null, objective text not null, captured_by varchar(30), capture_utctime integer, primary key ( board, objective_index ))'
-      - 'CREATE TABLE if not exists users ( id INTEGER AUTO_INCREMENT PRIMARY KEY, username VARCHAR(32) NOT NULL UNIQUE, password VARCHAR(40) NOT NULL)'
-      - 'CREATE TABLE if not exists roles ( id INTEGER AUTO_INCREMENT PRIMARY KEY, role VARCHAR(32) NOT NULL)'
+      - 'CREATE TABLE if not exists users ( id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(32) NOT NULL UNIQUE, password VARCHAR(40) NOT NULL)'
+      - 'CREATE TABLE if not exists roles ( id INTEGER PRIMARY KEY AUTOINCREMENT, role VARCHAR(32) NOT NULL)'
       - 'CREATE TABLE if not exists user_roles ( user_id INTEGER NOT NULL, role_id INTEGER NOT NULL, primary key (user_id, role_id))'
