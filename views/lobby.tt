@@ -1,0 +1,14 @@
+<%# vim: set ft=html : %>
+<h1>Lobby</h1>
+
+<p>Once you click the link, the board will be revealed to all players.</p>
+<p>This page will auto-refresh every second, and switch to the player screen if somebody else starts the round</p>
+
+<a style="font-size:3em;" href="/board/<%board_id%>">Player Screen</a>
+
+<script type="text/javascript">
+	function lets_see (){
+		location.reload();
+	}
+	setTimeout(lets_see, 750);
+</script>

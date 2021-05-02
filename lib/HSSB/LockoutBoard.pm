@@ -69,11 +69,28 @@ post '/board/generate' => require_login sub {
 		database->quick_insert('teammembers', { board => $board_id, team => 2, player => $player });
 	}
 
-	return redirect( "/board/$board_id" );
+	return redirect( "/board/$board_id/lobby" );
+};
+
+get '/board/:board/lobby' => require_login sub {
+	my $board_id = param 'board';
+	my $board_state = database->quick_lookup( 'boards', { board => $board_id, }, 'state');
+
+	return redirect( "/board/$board_id" ) if $board_state eq 'playing';
+
+	template 'lobby' => {
+		title => 'HSSB::LockoutBoard',
+		board_id => $board_id,
+	};
 };
 
 get '/board/:board' => require_login sub {
 	my $board_id = param 'board';
+	my $board_state = database->quick_lookup( 'boards', { board => $board_id, }, 'state');
+
+	if( $board_state eq 'generated' ){
+		database->quick_update( 'boards', { board => $board_id, }, { state => 'playing' } );
+	}
 
 	my @objectives = database->quick_select('scored_board', { board => $board_id }, { order_by => 'objective_index'});
 

@@ -13,7 +13,7 @@
 <ul>
 <% foreach board in boards %>
 	<li>
-		<a href="/<% board.user_is_player ? "board" : "spectate" %>/<% board.board %>">
+		<a href="/<% board.user_is_player ? "board" : "spectate" %>/<% board.board %>/lobby">
 			Board <% board.name ? board.name : board.board %>
 		</a>
 	</li>
