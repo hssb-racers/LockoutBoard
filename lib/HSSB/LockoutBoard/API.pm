@@ -48,7 +48,7 @@ get '/board/:board' => sub {
 		$obj->{capture_state} = defined $obj->{captured_by_team} ? $obj->{captured_by_team} == $team ? 'true' : 'false' : 'uncaptured';
 	}
 
-	my $our_score = grep { $_->{captured_by_team} == $team } @objectives;
+	my $our_score = grep { ($_->{captured_by_team}//-1) == $team } @objectives;
 	my $uncaptured_score = grep { !defined $_->{captured_by_team} } @objectives;
 	my $their_score = (scalar @objectives) - $uncaptured_score - $our_score;
 

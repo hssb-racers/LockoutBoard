@@ -81,7 +81,7 @@ get '/board/:board' => require_login sub {
 
 	my $team = database->quick_lookup('teammembers', { board => $board_id, player => logged_in_user->{'username'} }, 'team');
 
-	my $our_score = grep { $_->{captured_by_team} == $team } @objectives;
+	my $our_score = grep { ($_->{captured_by_team}//-1) == $team } @objectives;
 	my $uncaptured_score = grep { !defined $_->{captured_by_team} } @objectives;
 	my $their_score = (scalar @objectives) - $uncaptured_score - $our_score;
 
