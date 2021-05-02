@@ -1,6 +1,6 @@
 function CaptureQuest(){
 	var quest = $(this)
-	var board_id = quest.closest('[data-boardid]').data('boardid');
+	var board_id = $('#board').data('boardid');
 	var quest_id = quest.attr('id').replace('quest-','');
 
 	console.log("board id: "+ board_id);
