@@ -27,18 +27,48 @@ code,
 }
 
 #board {
+	height: 100%;
+	width: 100%;
+}
+
+#board .scores {
+	margin: 15px auto;
+	width: max-content;
+}
+
+#board .our-score,
+#board .their-score,
+#board .uncaptured {
+	display: inline-block;
+	min-width: 2em;
+	font-size: 2em;
+	text-align: center;
+}
+
+#board .our-score {
+	background-color: green;
+}
+#board .their-score {
+	background-color: darkred;
+}
+#board .uncaptured {
+	background-color: #f8f8f8;
+	color: black;
+}
+
+#board .grid {
 	height: 90%;
 	width: 100%;
 	display: grid;
 }
 
-#board[data-size="9"] {
-	grid-template-columns: repeat(3, 30%);
+#board[data-size="9"] .grid {
+	grid-template-columns: repeat(3, 33%);
 	grid-template-rows: repeat(3, 30%);
 }
 
-#board[data-size="25"] {
-	grid-template-columns: repeat(5, 18%);
+#board[data-size="25"] .grid {
+	grid-template-columns: repeat(5, 20%);
 	grid-template-rows: repeat(5, 18%);
 }
 

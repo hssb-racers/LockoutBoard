@@ -48,9 +48,18 @@ get '/board/:board' => sub {
 		$obj->{capture_state} = defined $obj->{captured_by_team} ? $obj->{captured_by_team} == $team ? 'true' : 'false' : 'uncaptured';
 	}
 
+	my $our_score = grep { $_->{captured_by_team} == $team } @objectives;
+	my $uncaptured_score = grep { !defined $_->{captured_by_team} } @objectives;
+	my $their_score = (scalar @objectives) - $uncaptured_score - $our_score;
+
 	return {
 		board_state => database->quick_lookup( 'boards', { board => $board_id, }, 'state'),
 		objectives => \@objectives,
+		scores => {
+			ours => $our_score,
+			theirs => $their_score,
+			nobodys => $uncaptured_score,
+		}
 	};
 };
 

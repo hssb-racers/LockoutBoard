@@ -35,6 +35,10 @@ function RefreshQuests(singleRun = false){
 
 		board.data('state', data.board_state);
 
+		board.find('.scores .our-score').text( data.scores.ours );
+		board.find('.scores .their-score').text( data.scores.theirs );
+		board.find('.scores .uncaptured').text( data.scores.nobodys );
+
 		if( ['won','draw','lost'].includes(data.board_state) ){
 			clearInterval(constantReloader);
 		}
