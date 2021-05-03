@@ -17,4 +17,4 @@
 	</div>
 
 </div>
-<script type="text/javascript" src="<% request.uri_base %>/javascripts/board.js"></script>
+<script type="text/javascript" src="/javascripts/board.js"></script>
