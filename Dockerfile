@@ -1,6 +1,6 @@
 FROM perl:latest
 LABEL maintainer="kandre@ak-online.be"
-LABEL org.opencontainers.image.source https://github.com/hssb-racers/lockoutboard
+LABEL org.opencontainers.image.source=https://github.com/hssb-racers/lockoutboard
 
 RUN cpanm Carton Starman
 
@@ -9,5 +9,5 @@ WORKDIR /LockoutBoard
 RUN carton install --deployment
 
 EXPOSE 1701
-ENTRYPOINT /LockoutBoard/docker-entrypoint.sh
+ENTRYPOINT [ "/LockoutBoard/docker-entrypoint.sh" ]
 

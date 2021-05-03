@@ -10,4 +10,4 @@ if ! test -f data/objectives.yaml; then
 	cp default_data/objectives.yaml data/objectives.yaml
 fi
 
-exec carton exec starman --port ${PORT:-1701} --preload-app /LockoutBoard/bin/app.psgi
+exec carton exec starman --port "${PORT:-1701}" --preload-app /LockoutBoard/bin/app.psgi
