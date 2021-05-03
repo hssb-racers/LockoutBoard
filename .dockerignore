@@ -1,2 +1,5 @@
+# the installed modules should not be bundled in
 local/
-data/boards.yaml
+
+# the data directory if it exists locally should be ignored
+data

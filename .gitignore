@@ -5,11 +5,14 @@ local/
 **.swp
 **.swo
 
+# ignore the symlink I use, that points my data/ to default_data/
+data
+
 # ignore the database - it shouldn't be shipped, as it's only runtime data
-data/boards.sqlite
+default_data/boards.sqlite
 
 # ignore the session storage
-data/sessions/
+default_data/sessions/
 
 # when I run superlinter locally, it generate the logfile, which shouldn't end up in git
 super-linter.log
