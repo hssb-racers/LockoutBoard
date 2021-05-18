@@ -1,4 +1,4 @@
-name: 'build-image'
+name: 'CI/CD'
 
 on:
   push:
@@ -7,27 +7,68 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.tagger.outputs.tag }}
     steps:
-      -
-        name: Set up QEMU
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Find Tag
+        id: tagger
+        uses: jimschubert/query-tag-action@v2
+        with:
+          include: 'v*'
+          exclude: '*-rc*'
+          abbrev: 10
+          commit-ish: HEAD
+
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
-      -
-        name: Set up Docker Buildx
+
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      -
-        name: Login to GitHub Container Registry
+
+      - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
-      -
-        name: Build and push
+
+      - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/klaernie/hssb-lockoutboard:latest
-      -
-        name: Image digest
+          tags: |
+            ghcr.io/klaernie/hssb-lockoutboard:latest
+            ghcr.io/klaernie/hssb-lockoutboard:${{ steps.tagger.outputs.tag }}
+
+      - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: azure/k8s-set-context@v1
+        id: setcontext
+        with:
+          method: service-account
+          k8s-url: ${{ secrets.K8S_MACY_URL }}
+          k8s-secret: ${{ secrets.K8S_MACY_HSSB }}
+
+      - uses: Azure/k8s-deploy@v1.4
+        with:
+          namespace: 'hssb'
+          manifests: |
+            k8s/001_ns.yaml
+            k8s/005_pv.yaml
+            k8s/010_app.yaml
+            k8s/020_service.yaml
+            k8s/040_ingress.yaml
+          images: ghcr.io/klaernie/hssb-lockoutboard:${{ needs.build.outputs.tag }}
+          kubectl-version: 'latest'
