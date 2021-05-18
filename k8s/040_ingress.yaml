@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lockoutboard
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  namespace: hssb
+spec:
+  tls:
+    - hosts:
+      - lockoutboard.hssb.cloud.ak-online.be
+      secretName: "tls-lockoutboard"
+  rules:
+   - host: lockoutboard.hssb.cloud.ak-online.be
+     http:
+      paths:
+        - pathType: Exact
+          path: /
+          backend:
+            service:
+              name: svc-lockoutboard
+              port:
+                name: http

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lockoutboard-app
+  labels:
+    app: lockoutboard
+  namespace: hssb
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: lockoutboard
+  template:
+    metadata:
+      labels:
+        app: lockoutboard
+    spec:
+      containers:
+      - name: starman
+        image:  ghcr.io/klaernie/hssb-lockoutboard:latest
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 1701
+        volumeMounts:
+          - name: data
+            mountPath: /LockoutBoard/data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: app-data

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-lockoutboard
+  namespace: hssb
+spec:
+  selector:
+    app: lockoutboard
+  ports:
+    - protocol: TCP
+      port: 1701
+      name: http
+  clusterIP: None
+  type: ClusterIP
