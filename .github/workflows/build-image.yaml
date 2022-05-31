@@ -40,7 +40,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.CR_PAT }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
         id: docker_build
@@ -48,8 +48,8 @@ jobs:
         with:
           push: true
           tags: |
-            ghcr.io/klaernie/hssb-lockoutboard:latest
-            ghcr.io/klaernie/hssb-lockoutboard:${{ steps.tagger.outputs.tag }}
+            ghcr.io/${{ github.repository_owner }}/hssb-lockoutboard:latest
+            ghcr.io/${{ github.repository_owner }}/hssb-lockoutboard:${{ steps.tagger.outputs.tag }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -77,5 +77,5 @@ jobs:
             k8s/010_app.yaml
             k8s/020_service.yaml
             k8s/040_ingress.yaml
-          images: ghcr.io/klaernie/hssb-lockoutboard:${{ needs.build.outputs.tag }}
+          images: ghcr.io/${{ github.repository_owner }}/hssb-lockoutboard:${{ needs.build.outputs.tag }}
           kubectl-version: 'latest'
