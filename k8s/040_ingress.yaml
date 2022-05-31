@@ -8,6 +8,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-prod
   namespace: hssb
 spec:
+  ingressClassName: nginx
   tls:
     - hosts:
       - lockoutboard.hssb.cloud.ak-online.be
