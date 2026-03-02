@@ -1,4 +1,4 @@
-requires "Dancer2" => "0.300005";
+requires "Dancer2" => "0.400001";
 requires "Dancer2::Plugin::Database" => "0";
 requires "DBD::SQLite" => "0";
 requires "Dancer2::Plugin::Auth::Extensible" => "0";
