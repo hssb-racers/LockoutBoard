@@ -6,7 +6,7 @@ requires "Dancer2::Plugin::Auth::Extensible::Provider::Database" => "0";
 requires "Starman" => "0";
 requires "Template::Toolkit" => "0";
 requires "List::Gen" => "0";
-requires "String::Random" => "0";
+requires "String::Random" => "0.32";
 
 recommends "YAML"             => "0";
 recommends "URL::Encode::XS"  => "0";
