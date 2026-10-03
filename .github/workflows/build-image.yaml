@@ -23,7 +23,7 @@ jobs:
           commit-ish: HEAD
 
       - name: Cache Carton local/
-        uses: actions/cache@v2
+        uses: actions/cache@v6
         with:
           path: |
             local
