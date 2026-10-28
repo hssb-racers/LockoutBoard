@@ -9,7 +9,7 @@ requires "List::Gen" => "0";
 requires "String::Random" => "0";
 
 recommends "YAML"             => "0";
-recommends "URL::Encode::XS"  => "0";
+recommends "URL::Encode::XS"  => "0.03";
 recommends "CGI::Deurl::XS"   => "0";
 recommends "HTTP::Parser::XS" => "0";
 
