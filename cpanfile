@@ -15,5 +15,5 @@ recommends "HTTP::Parser::XS" => "0";
 
 on "test" => sub {
     requires "Test::More"            => "0";
-    requires "HTTP::Request::Common" => "0";
+    requires "HTTP::Request::Common" => "7.04";
 };
