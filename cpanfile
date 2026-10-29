@@ -1,5 +1,5 @@
 requires "Dancer2" => "0.300005";
-requires "Dancer2::Plugin::Database" => "0";
+requires "Dancer2::Plugin::Database" => "2.17";
 requires "DBD::SQLite" => "0";
 requires "Dancer2::Plugin::Auth::Extensible" => "0";
 requires "Dancer2::Plugin::Auth::Extensible::Provider::Database" => "0";
