@@ -10,7 +10,7 @@ requires "String::Random" => "0";
 
 recommends "YAML"             => "0";
 recommends "URL::Encode::XS"  => "0";
-recommends "CGI::Deurl::XS"   => "0";
+recommends "CGI::Deurl::XS"   => "0.08";
 recommends "HTTP::Parser::XS" => "0";
 
 on "test" => sub {
